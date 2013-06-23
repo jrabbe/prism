@@ -1,0 +1,30 @@
+{
+    "private": true,
+    "name": "prism",
+    "preferGlobal": true,
+    "version": "0.0.1",
+    "author": "Jonas Rabbe",
+    "description": "An analyser for Facebook data. Goes through groups, likes, etc. for your friends and creates nice graphs of their mutual connections.",
+    "bin": {
+        "prism": "./bin/prism"
+    },
+    "main": "./lib/prism",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jrabbe/prism.git"
+    },
+    "keywords": [
+        "cli",
+        "facebook",
+        "analysis"
+    ],
+    "dependencies": {
+        "typescript": "0.9.x",
+        "commander": "1.2.x"
+    },
+    "directories": {
+        "bin": "./bin",
+        "test": "./test"
+    }
+    "engine": "node >= 0.10.11"
+}

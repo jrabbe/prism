@@ -1,0 +1,13 @@
+#!/bin/bash
+
+TOOL="neato"
+OPTIONS=()
+
+OPTIONS[${#OPTIONS[*]}]="-Tpdf"
+OPTIONS[${#OPTIONS[*]}]="-O"
+OPTIONS[${#OPTIONS[*]}]="-Goverlap=false"
+OPTIONS[${#OPTIONS[*]}]="-Gsplines=true"
+OPTIONS[${#OPTIONS[*]}]="-Gsep=1"
+
+CMD="$TOOL ${OPTIONS[@]} $1"
+$CMD
