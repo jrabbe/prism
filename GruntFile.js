@@ -28,7 +28,7 @@ module.exports = function (grunt) {
         watch: {
             files: '**/*.ts',
             tasks: ['typescript']
-        }
+        },
     });
 
     grunt.registerTask('default', ['express', 'watch']);

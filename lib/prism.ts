@@ -9,9 +9,6 @@ import express = module("express");
 
 var app = express();
 
-app.get("/", function(request, response) {
-    response.send("Welcome to PRISM");
-});
+app.use(express.static('./public'));
 
 module.exports = app;
-
