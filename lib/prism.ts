@@ -14,6 +14,7 @@ app.use('/img', express.static('./public/img'));
 app.use('/templates', express.static('./public/templates'));
 app.use('/js', express.static('./js/lib/app'));
 app.use('/js/vendor', express.static('./bower_components'));
+app.use('/js/vendor', express.static('./public/js'));
 
 app.get('*', function (request, response) {
     response.sendfile('./public/index.html');
