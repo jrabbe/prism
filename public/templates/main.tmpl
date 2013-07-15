@@ -1,0 +1,40 @@
+<div class="hero-unit">
+  <p>
+    Learn the commonalities of your facebook network based only on the available metadata? <a class="btn" href="/about">Learn more</a></p>
+</div>
+
+<div class="span8 offset1">
+  <h2>Fetch Facebook Data</h2>
+
+  <form class="form-horizontal" ng-submit="fetchData()">
+    <div class="control-group">
+      <label class="control-label" for="accessToken">Facebook Access Token</label>
+      <div class="controls">
+        <input type="text" id="accessToken" class="input-xxlarge" ng-model="fetch.accessToken" placeholder="Access Token" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Data to Fetch</label>
+      <div class="controls">
+        <label class="checkbox inline">
+          <input type="checkbox" value="events" ng-model="fetch.events"> Events
+        </label>
+        <label class="checkbox inline">
+          <input type="checkbox" value="groups" ng-model="fetch.groups"> Groups
+        </label>
+        <label class="checkbox inline">
+          <input type="checkbox" value="interests" ng-model="fetch.interests"> Interests
+        </label>
+        <label class="checkbox inline">
+          <input type="checkbox" value="likes" ng-model="fetch.likes"> Likes
+        </label>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label"></label>
+      <div class="controls">
+        <button class="btn btn-primary" type="submit">Fetch Data</button>
+      </div>
+    </div>
+  </form>
+</div>

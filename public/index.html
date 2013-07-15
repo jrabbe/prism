@@ -3,11 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
+    <title>PRISM</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <base href="/">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="/js/vendor/angular-unstable/angular.js"></script>
+    <script src="/js/interfaces/IMainControllerScope.js"></script>
+    <script src="/js/interfaces/INavControllerScope.js"></script>
+    <script src="/js/controllers/NavController.js"></script>
+    <script src="/js/controllers/MainController.js"></script>
+    <script src="/js/app.js"></script>
+
     <style>
     body {
         padding-top: 60px;
@@ -15,15 +24,19 @@
     }
     </style>
     <link rel="stylesheet" href="css/main.css">
-</head>
+    <link rel="shortcut icon" href="/img/icons/favicon.ico" /></head>
 <body>
 
     <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-fixed-top" ng-controller="NavController">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand">PRISM</a>
+                <a class="brand" href="/"><img src="/img/icons/prism.png" /> PRISM</a>
+                <ul class="nav">
+                    <li ng-class="{active: currentPage === 'home'}"><a href="/">Home</a></li>
+                    <li ng-class="{active: currentPage === 'about'}"><a href="/about">About</a></li>
+                </ul>
             </div>
         </div>
     </div>
