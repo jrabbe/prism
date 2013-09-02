@@ -17,28 +17,56 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------
 
-#
-# The main application file for dashing.
-#
+from flask import Flask, request
 
-from flask import Flask, url_for, render_template, json, request, make_response
+#
+# Static assets
+#
 
 app = Flask(__name__, static_url_path='/assets', static_folder='public')
 
+#
 # API endpoints
+#
 
-@app.route('/api/plugins')
-def plugins():
+@app.route('/api/fetch-data', methods=['GET'])
+def fetchData():
+    """ Endpoint action for fetching data from Facebook.
+
+    Parses the provided query string to find which types of data to fetch.
+
+    Query string arguments:
+        access-token: The access token for the user providing at least access to any of the other
+        options selected.
+        events: If present all events will be fetched for each friend.
+        groups: If present all groups will be fetched for each friend.
+        interests: If present all interests will be fetched for each friend.
+        likes: If present all likes will be fetched for each friend.
+    """
+
+    accessToken = request.args.get('access-token', '')
+
+    events = request.args.get('events', None)
+    groups = request.args.get('groups', None)
+    interests = request.args.get('interests', None)
+    likes = request.args.get('likes', None)
+
+
+
     return "test"
 
+#
 # Catch all endpoint serving the index page
+#
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def index(path):
     return app.send_static_file('index.html')
-    # return render_template(url_for("static", filename="index.html"))
-#     return static_file('index.html', root='public')
+
+#
+# Run the app
+#
 
 if __name__ == "__main__":
     app.run(debug=True)
