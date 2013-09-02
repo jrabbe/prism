@@ -1,6 +1,0 @@
-{
-    "name": "prism",
-    "dependencies": {
-        "angular-unstable": "~1.1.5"
-    }
-}

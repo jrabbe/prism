@@ -1,37 +1,48 @@
-# prism
+prism
+=====
 
 There has been a large amount of talk about the [Prism surveillance program][prism] in the news and
 among people. This was an idea I had based on the [metadata analysis that identified Paul Revere][slate].
 
-I made one version in Python (can be seen in `./old`), but when I wanted to redo it better, I wanted
-to try out something new. Since I've been meaning to try out Typescript for a while, that was the
-choice.
+I originally made one version in Python (which is can be viewed in `./old`), but when I wanted to
+redo it better I started out with TypeScript, but quickly figured that the annoyances of TypeScript
+with node.js were too much for me. After other things interrupted my progress, I decided to take
+a Python + JavaScript approach.
 
 Very much still a work-in-progress (apart from some of the python code, nothing works).
 
-## Requirements
+Requirements
+------------
 
-To run this program you need node.js and access to Facebook.
+To run this program you need Python and access to Facebook.
 
 You need to go to the [Facebook graph explorer][graph-explorer] and generate an access token with
 the requirements you need. For instance to graph the likes of your friends you need the `friend_likes`
 permissions. This access token should not be shared with anyone (lest they do stuff in your name),
 and it expires after a few hours.
 
-## Usage
+Dependencies
+------------
 
-Have to figure this out... May want to just have a thin JS 'app' shell that includes the typescript
-modules.
+This web application simply depends on the *flask* python module. I would suggest creating a virtual
+environment for installing into. Make sure you have `virtualenv` installed, and run.
 
+    virtualenv prism-env
+    . prism-env/bin/activate
 
+After activating the environment simply run pip like normal.
+
+    pip install flask
+
+Now you can run the app using
+
+    python prism.py
+
+Each time you want to run the app, you just activate the virtual environment, and start the
+prism.py script again.
 
 
 [prism]: http://en.wikipedia.org/wiki/PRISM_(surveillance_program)
 [slate]: http://www.slate.com/articles/health_and_science/science/2013/06/prism_metadata_analysis_paul_revere_identified_by_his_connections_to_other.html
 
 [graph-explorer]: https://developers.facebook.com/tools/explorer
-
-[process]: http://nodejs.org/api/process.html#process_process_argv
-[commander]: https://github.com/visionmedia/commander.js
-[typescript-require]: https://github.com/eknkc/typescript-require
-[typescript-node-definitions]: https://github.com/soywiz/typescript-node-definitions
