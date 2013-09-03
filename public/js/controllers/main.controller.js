@@ -29,14 +29,17 @@ var prism;
 
             $scope.fetch = {};
             $scope.fetchResult = {};
+            $scope.isLoading = false;
 
             $scope.fetchData = function () {
+                $scope.isLoading = true;
                 FetchObject.startFetching($scope.fetch).then(function (data) {
                     if (data.isValid()) {
                         console.log('valid data gotten: ', data);
                         $location.path('/loading').search({request: data.requestId});
                     } else {
                         $scope.fetchResult = data;
+                        $scope.isLoading = false;
                     }
                 });
             };

@@ -15,7 +15,7 @@
     {{fetchResult.error}}
   </div>
   <form class="form-horizontal" ng-submit="fetchData()">
-    <fieldset>
+    <fieldset ng-disabled="isLoading">
       <div class="form-group">
         <label class="col-lg-4 control-label" for="accessToken">Facebook Access Token</label>
         <div class="col-lg-8">
