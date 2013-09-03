@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="prism">
+<html ng-app="prism" lang="en">
 <head>
     <meta charset="utf-8">
     <title>PRISM</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -18,20 +18,16 @@
     <script src="/assets/js/prism.app.js"></script>
 
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="shortcut icon" href="/assets/img/icons/favicon.ico" /></head>
+    <link rel="shortcut icon" href="/assets/img/icons/favicon.ico" />
+</head>
 <body>
-
-    <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
-    <div class="navbar navbar-fixed-top" ng-controller="NavController">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" href="/"><img src="/assets/img/icons/prism.png" /> PRISM</a>
-                <ul class="nav">
-                    <li ng-class="{active: currentPage === 'home'}"><a href="/">Home</a></li>
-                    <li ng-class="{active: currentPage === 'about'}"><a href="/about">About</a></li>
-                </ul>
-            </div>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavController">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="/assets/img/icons/prism.png" /> PRISM</a>
+            <ul class="nav navbar-nav">
+                <li ng-class="{active: currentPage === 'home'}"><a href="/">Home</a></li>
+                <li ng-class="{active: currentPage === 'about'}"><a href="/about">About</a></li>
+            </ul>
         </div>
     </div>
 

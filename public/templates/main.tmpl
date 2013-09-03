@@ -1,46 +1,50 @@
-<div class="hero-unit">
-  <p>
-    Learn the commonalities of your facebook network based only on the available metadata?
-    <a class="btn" href="/about">Learn more</a>
-  </p>
-</div>
+<div class="col-lg-offset-1 col-lg-8">
+  <div class="well">
+    <p class="lead">
+      Learn the commonalities of your facebook network based only on the available metadata? How is your network connected? Does it congregate in obvious groups, does it have similar likes? Learn it all using PRISM.
+    </p>
+    <p class="text-right">
+      <a class="btn btn-primary" href="/about">Learn more</a>
+    </p>
+  </div>
 
-<div class="span8 offset1">
   <h2>Fetch Facebook Data</h2>
 
-  <div class="alert" ng-show="fetchResult.isError()">
+  <div class="alert alert-danger" ng-show="fetchResult.isError()">
+    <button type="button" class="close" aria-hidden="true" ng-click="closeAlert()">&times;</button>
     {{fetchResult.error}}
   </div>
   <form class="form-horizontal" ng-submit="fetchData()">
-    <div class="control-group">
-      <label class="control-label" for="accessToken">Facebook Access Token</label>
-      <div class="controls">
-        <input type="text" id="accessToken" class="input-xxlarge" ng-model="fetch.accessToken"
-        placeholder="Access Token" />
+    <fieldset>
+      <div class="form-group">
+        <label class="col-lg-4 control-label" for="accessToken">Facebook Access Token</label>
+        <div class="col-lg-8">
+          <input type="text" id="accessToken" class="form-control" ng-model="fetch.accessToken"
+          placeholder="Access Token" />
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label">Data to Fetch</label>
-      <div class="controls">
-        <label class="checkbox inline">
-          <input type="checkbox" value="events" ng-model="fetch.events"> Events
-        </label>
-        <label class="checkbox inline">
-          <input type="checkbox" value="groups" ng-model="fetch.groups"> Groups
-        </label>
-        <label class="checkbox inline">
-          <input type="checkbox" value="interests" ng-model="fetch.interests"> Interests
-        </label>
-        <label class="checkbox inline">
-          <input type="checkbox" value="likes" ng-model="fetch.likes"> Likes
-        </label>
+      <div class="form-group">
+        <label class="col-lg-4 control-label">Data to Fetch</label>
+        <div class="col-lg-8">
+          <label class="checkbox-inline">
+            <input type="checkbox" value="events" ng-model="fetch.events"> Events
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" value="groups" ng-model="fetch.groups"> Groups
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" value="interests" ng-model="fetch.interests"> Interests
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" value="likes" ng-model="fetch.likes"> Likes
+          </label>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label"></label>
-      <div class="controls">
-        <button class="btn btn-primary" type="submit">Fetch Data</button>
+      <div class="form-group">
+        <div class="col-lg-offset-4 col-lg-8">
+          <button class="btn btn-primary" type="submit">Fetch Data</button>
+        </div>
       </div>
-    </div>
+    <fieldset>
   </form>
 </div>

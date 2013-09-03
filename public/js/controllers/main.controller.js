@@ -40,6 +40,12 @@ var prism;
                     }
                 });
             };
+
+            $scope.closeAlert = function () {
+                if ($scope.fetchResult.isError()) {
+                    $scope.fetchResult.clearError();
+                }
+            };
         }];
 
 })(prism || (prism = {}));

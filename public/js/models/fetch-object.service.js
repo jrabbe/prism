@@ -31,6 +31,9 @@ var prism;
                 },
                 isError: function () {
                     return !this.valid;
+                },
+                clearError: function () {
+                    this.valid = true;
                 }
             }
 
