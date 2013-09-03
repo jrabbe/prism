@@ -23,12 +23,22 @@ var prism;
 
     prism.MainController = [
         '$scope',
-        function MainController($scope) {
+        'FetchObject',
+        function ($scope, FetchObject) {
 
             $scope.fetch = {};
+            $scope.fetchResult = {};
 
             $scope.fetchData = function () {
-                console.log('fetch some data.', $scope.fetch);
+                FetchObject.startFetching($scope.fetch).then(function (data) {
+                    if (data.isValid()) {
+                        // test
+                    } else {
+                        console.log('in main controller:', data);
+                        console.log('is valid:', data.isValid(), 'is error:', data.isError());
+                        $scope.fetchResult = data;
+                    }
+                });
             };
         }];
 

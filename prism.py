@@ -17,7 +17,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------
 
-from flask import Flask, request
+from flask import Flask, request, json
+from prism.fetching import Fetching
 
 #
 # Static assets
@@ -29,9 +30,9 @@ app = Flask(__name__, static_url_path='/assets', static_folder='public')
 # API endpoints
 #
 
-@app.route('/api/fetch-data', methods=['GET'])
+@app.route('/api/setup-fetch', methods=['GET'])
 def fetchData():
-    """ Endpoint action for fetching data from Facebook.
+    """ Endpoint action for setting up the fetching of data.
 
     Parses the provided query string to find which types of data to fetch.
 
@@ -44,16 +45,26 @@ def fetchData():
         likes: If present all likes will be fetched for each friend.
     """
 
-    accessToken = request.args.get('access-token', '')
+    accessToken = request.args.get('accessToken', '')
 
-    events = request.args.get('events', None)
-    groups = request.args.get('groups', None)
-    interests = request.args.get('interests', None)
-    likes = request.args.get('likes', None)
+    events = request.args.get('events', False)
+    groups = request.args.get('groups', False)
+    interests = request.args.get('interests', False)
+    likes = request.args.get('likes', False)
 
+    print 'got accessToken: ', accessToken
+    print 'events: ', events
+    print 'groups: ', groups
+    print 'interests: ', interests
+    print 'likes: ', likes
 
+    fetchObject = Fetching.createFetchObject({'accessToken': accessToken, 'events': events,
+        'groups': groups, 'interests': interests, 'likes': likes})
 
-    return "test"
+    if fetchObject != None:
+        return json.dumps(fetchObject.checkAccessToken())
+
+    return json.dumps({'error': 'This is all madness!!!'})
 
 #
 # Catch all endpoint serving the index page

@@ -18,34 +18,28 @@
 // -------------------------------------------------------------------------------------------------
 
 var prism;
-(function (angular, prism) {
+(function (prism) {
     'use strict';
 
-    angular.module('prism', ['ngRoute'])
+    prism.FetchObject = [
+        '$http',
+        function ($http) {
 
-        .controller('LoadingController', prism.LoadingController)
-        .controller('MainController', prism.MainController)
-        .controller('NavController', prism.NavController)
+            var resultTemplate = {
+                isValid: function () {
+                    return !!this.valid;
+                },
+                isError: function () {
+                    return !this.valid;
+                }
+            }
 
-        .service('FetchObject', prism.FetchObject)
+            this.startFetching = function (params) {
+                return $http.get('/api/setup-fetch', {params: params}).then(function (response) {
+                    console.log('result of /api/setup-fetch call.', response);
+                    return angular.extend(response.data, resultTemplate);
+                });
+            };
+        }];
 
-        .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-                $routeProvider
-                    .when('/', {
-                        controller: 'MainController',
-                        templateUrl: '/assets/templates/main.tmpl'
-                    })
-                    .when('/loading', {
-                        controller: 'LoadingController',
-                        templateUrl: '/assets/templates/loading.tmpl'
-                    })
-                    .when('/about', {
-                        controller: 'NavController',
-                        templateUrl: '/assets/templates/about.tmpl'
-                    })
-                    .otherwise({ redirectTo: '/' });
-
-                $locationProvider.html5Mode(true);
-            }]);
-
-})(angular, prism || (prism = {}));
+})(prism || (prism = {}));
