@@ -37,8 +37,9 @@ var prism;
                 }
             }
 
-            this.startFetching = function (params) {
-                return $http.get('/api/setup-fetch', {params: params}).then(function (response) {
+            this.startFetching = function (requestBody) {
+                return $http.post('/api/fetch', requestBody).then(function (response) {
+                    console.log('response,', response);
                     return angular.extend(response.data, resultTemplate);
                 });
             };

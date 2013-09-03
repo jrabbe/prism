@@ -17,7 +17,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------
 
-from flask import Flask, request, json
+from flask import Flask, request, json, Response
 from prism.fetching import Fetching
 
 #
@@ -30,41 +30,51 @@ app = Flask(__name__, static_url_path='/assets', static_folder='public')
 # API endpoints
 #
 
-@app.route('/api/setup-fetch', methods=['GET'])
+@app.route('/api/fetch', methods=['GET', 'POST'])
 def fetchData():
-    """ Endpoint action for setting up the fetching of data.
+    """ Endpoint action for setting up and fetching data.
 
-    Parses the provided query string to find which types of data to fetch.
+    If the request method is POST, then the body is parsed, and the fetch is setup. if the setup
+    is successful then the request id (a UUID) is returned, this can be used on subsequent GET
+    requests to advance the fetching.
 
-    Query string arguments:
-        access-token: The access token for the user providing at least access to any of the other
+    POST body parameters:
+        accessToken: The access token for the user providing at least access to any of the other
         options selected.
         events: If present all events will be fetched for each friend.
         groups: If present all groups will be fetched for each friend.
         interests: If present all interests will be fetched for each friend.
         likes: If present all likes will be fetched for each friend.
+
+    GET query parameters:
+        requestId: The request id returned by the post request to get status and advance the fetch.
     """
 
-    accessToken = request.args.get('accessToken', '')
+    if request.method == 'POST':
+        body = request.get_json()
 
-    events = request.args.get('events', False)
-    groups = request.args.get('groups', False)
-    interests = request.args.get('interests', False)
-    likes = request.args.get('likes', False)
+        accessToken = body.get('accessToken', None)
 
-    print 'got accessToken: ', accessToken
-    print 'events: ', events
-    print 'groups: ', groups
-    print 'interests: ', interests
-    print 'likes: ', likes
+        events = body.get('events', False)
+        groups = body.get('groups', False)
+        interests = body.get('interests', False)
+        likes = body.get('likes', False)
 
-    fetchObject = Fetching.createFetchObject({'accessToken': accessToken, 'events': events,
-        'groups': groups, 'interests': interests, 'likes': likes})
+        fetchObject = Fetching.createFetchObject({'accessToken': accessToken, 'events': events,
+            'groups': groups, 'interests': interests, 'likes': likes})
 
-    if fetchObject != None:
-        return json.dumps(fetchObject.checkAccessToken())
+        if fetchObject != None:
+            return json.dumps(fetchObject.checkAccessToken())
 
-    return json.dumps({'error': 'This is all madness!!!'})
+        return json.dumps({'error': 'This is all madness!!!', 'valid': False})
+
+    elif request.method == 'GET':
+        pass
+
+    else:
+
+        return Response(status='Method Not Allowed', status_code=405)
+
 
 #
 # Catch all endpoint serving the index page
