@@ -22,11 +22,21 @@ var prism;
     'use strict';
 
     prism.LoadingController = [
+        '$routeParams',
         '$scope',
         'FetchObject',
-        function ($scope, FetchObject) {
+        function ($routeParams, $scope, FetchObject) {
+            console.log('route params.', $routeParams);
 
             $scope.fetchResult = {};
+
+            $scope.closeAlert = function () {
+                if ($scope.fetchResult.isError()) {
+                    $scope.fetchResult.clearError();
+                }
+            };
+
+            $scope.percentComplete = 0;
         }];
 
 })(prism || (prism = {}));

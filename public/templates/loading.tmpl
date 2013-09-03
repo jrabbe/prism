@@ -1,8 +1,14 @@
 <div class="col-lg-offset-1 col-lg-8">
   <h2>Fetching data</h2>
 
-  <div class="alert" ng-show="fetchResult.isError()">
+  <div class="alert alert-danger" ng-show="fetchResult.isError()">
+    <button type="button" class="close" aria-hidden="true" ng-click="closeAlert()">&times;</button>
     {{fetchResult.error}}
   </div>
-  <div></div>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+    aria-valuemax="100" ng-style="width: {{percentComplete}}%;">
+      <span class="sr-only">{{percentComplete}}% Complete</span>
+    </div>
+  </div>
 </div>

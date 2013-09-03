@@ -22,9 +22,10 @@ var prism;
     'use strict';
 
     prism.MainController = [
+        '$location',
         '$scope',
         'FetchObject',
-        function ($scope, FetchObject) {
+        function ($location, $scope, FetchObject) {
 
             $scope.fetch = {};
             $scope.fetchResult = {};
@@ -32,10 +33,9 @@ var prism;
             $scope.fetchData = function () {
                 FetchObject.startFetching($scope.fetch).then(function (data) {
                     if (data.isValid()) {
-                        // test
+                        console.log('valid data gotten: ', data);
+                        $location.path('/loading').search({request: data.requestId});
                     } else {
-                        console.log('in main controller:', data);
-                        console.log('is valid:', data.isValid(), 'is error:', data.isError());
                         $scope.fetchResult = data;
                     }
                 });

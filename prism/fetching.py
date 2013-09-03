@@ -49,17 +49,13 @@ class Fetching(object):
     objectMap = {}
 
     @classmethod
-    def generateId(cls):
-        return uuid.uuid4()
-
-    @classmethod
     def createFetchObject(cls, fetchAttributes):
         if cls.objectMap == None:
             cls.objectMap = {}
 
         obj = Fetching(fetchAttributes)
 
-        cls.objectMap[Fetching.generateId()] = obj
+        cls.objectMap[obj.generateId()] = obj
 
         return obj
 
@@ -77,6 +73,11 @@ class Fetching(object):
         for key, value in fetchAttributes.iteritems():
             if key in self.VALID_ATTRIBUTES and value == True:
                 self.fetchAttributes.append(key)
+
+    def generateId(self):
+        self.id = uuid.uuid4()
+        return self.id
+
 
     def facebookRequest(self, url, field=None):
         """Makes a Facebook Graph API request based on the specified url.
@@ -105,7 +106,7 @@ class Fetching(object):
         except:
             return {u'error': u'Unknown error occurred, cannot fetch data.', u'valid': False}
 
-        return {u'valid': True}
+        return {u'valid': True, u'requestId': self.id}
 
 
     def getFriends(self, person=None):

@@ -39,7 +39,6 @@ var prism;
 
             this.startFetching = function (params) {
                 return $http.get('/api/setup-fetch', {params: params}).then(function (response) {
-                    console.log('result of /api/setup-fetch call.', response);
                     return angular.extend(response.data, resultTemplate);
                 });
             };
